@@ -1,7 +1,6 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { action } from "@ember/object";
-import DButton from "discourse/components/d-button";
 import DropdownSelectBox from "select-kit/components/dropdown-select-box";
 
 export default class TopicNavigationFilter extends Component {
@@ -12,17 +11,17 @@ export default class TopicNavigationFilter extends Component {
       {
         id: "latest",
         name: "Latest",
-        icon: "clock",
+        description: "Most recent topics",
       },
       {
         id: "top",
         name: "Top",
-        icon: "signal",
+        description: "Most popular topics",
       },
       {
         id: "hot",
         name: "Hot",
-        icon: "fire",
+        description: "Trending topics",
       },
     ];
   }
@@ -39,19 +38,41 @@ export default class TopicNavigationFilter extends Component {
 
   @action
   onFilterChange(filterId) {
-    const categorySlug = this.router.currentRoute?.params?.category_slug_path_with_id;
-    const tagId = this.router.currentRoute?.params?.tag_id;
-    
-    let route;
-    if (categorySlug) {
-      route = `discovery.${filterId}Category`;
-    } else if (tagId) {
-      route = `tag.show${filterId === "latest" ? "" : `.${filterId}`}`;
-    } else {
-      route = `discovery.${filterId}`;
+    if (filterId === this.selectedFilter) {
+      return;
     }
-    
-    this.router.transitionTo(route);
+
+    try {
+      const params = this.router.currentRoute?.params || {};
+      const categorySlug = params.category_slug_path_with_id;
+      const tagId = params.tag_id;
+      
+      let route;
+      if (categorySlug) {
+        // Category route
+        if (filterId === "latest") {
+          route = "discovery.category";
+        } else {
+          route = `discovery.${filterId}Category`;
+        }
+        this.router.transitionTo(route, categorySlug);
+      } else if (tagId) {
+        // Tag route
+        if (filterId === "latest") {
+          route = "tag.show";
+        } else {
+          route = `tag.show${filterId.charAt(0).toUpperCase() + filterId.slice(1)}`;
+        }
+        this.router.transitionTo(route, tagId);
+      } else {
+        // General route
+        this.router.transitionTo(`discovery.${filterId}`);
+      }
+    } catch (e) {
+      console.error("Navigation error:", e);
+      // Fallback to simple route
+      this.router.transitionTo(`discovery.${filterId}`);
+    }
   }
 
   <template>
@@ -60,7 +81,7 @@ export default class TopicNavigationFilter extends Component {
         @content={{this.filterOptions}}
         @value={{this.selectedFilter}}
         @onChange={{this.onFilterChange}}
-        @options={{hash icon="filter" showFullTitle=true}}
+        @options={{hash icon=null showFullTitle=true}}
         class="topic-filter-dropdown"
       />
     </div>

@@ -10,52 +10,53 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5em 0;
-  gap: 1em;
+  gap: 0.75em;
   flex-wrap: nowrap;
-  
-  // Left side container for category and tag
-  &::before {
-    content: "";
-    display: flex;
-    flex: 0 0 auto;
-    gap: 0.5em;
-  }
   
   // Hide unwanted elements in navigation container
   .nav-pills,
   .navigation-controls,
-  > li:not(.category-breadcrumb):not(.select-kit.combo-box.tag-drop) {
+  .list-controls,
+  > *:not(.category-breadcrumb):not(.combo-box.tag-drop):not(.topic-navigation-filter) {
     display: none !important;
   }
   
   // Left side: category and tag dropdowns
   .category-breadcrumb,
-  .select-kit.combo-box.tag-drop {
-    margin: 0;
+  .combo-box.tag-drop {
+    margin: 0 !important;
     flex: 0 0 auto;
     
     .select-kit-header {
       border-radius: 1.5em !important; // Rounded border
-      padding: 0.6em 1.2em;
-      height: auto;
+      padding: 0.6em 1.2em !important;
+      height: auto !important;
       min-height: 2.8em;
-      display: flex;
+      display: flex !important;
       align-items: center;
       gap: 0.6em;
-      border: 1px solid var(--primary-low-mid);
-      background: var(--secondary);
+      border: 1px solid var(--primary-low-mid) !important;
+      background: var(--secondary) !important;
+      transition: all 0.15s ease-in-out;
       
-      // Icon container before text
-      .d-icon:first-child {
-        display: none; // Hide default icons
+      &:hover {
+        border-color: var(--primary-low);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
       
+      // Hide default icons
+      .d-icon:not(.d-icon-caret-down):not(.d-icon-chevron-down) {
+        display: none !important;
+      }
+      
+      // Custom icon before text using FontAwesome
       &::before {
         font-family: "Font Awesome 6 Free";
         font-weight: 900;
         font-size: 1em;
         color: var(--primary-medium);
         flex-shrink: 0;
+        order: -2;
       }
       
       .selected-name,
@@ -64,17 +65,24 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        order: -1;
       }
       
-      // Caret icon at end
+      // Replace caret-down with caret-right icon
       .d-icon-caret-down,
       .d-icon-chevron-down {
         margin-left: auto;
         flex-shrink: 0;
+        order: 1;
+        
         &::before {
-          content: "\f054"; // caret-right icon
+          content: "\f054" !important; // caret-right icon
           font-family: "Font Awesome 6 Free";
           font-weight: 900;
+        }
+        
+        svg {
+          display: none;
         }
       }
     }
@@ -88,7 +96,7 @@
   }
   
   // Tag drop - hashtag icon
-  .select-kit.combo-box.tag-drop {
+  .combo-box.tag-drop {
     .select-kit-header::before {
       content: "\f292"; // hashtag
     }
@@ -105,13 +113,19 @@
 .topic-navigation-filter {
   .select-kit-header {
     border-radius: 1.5em !important;
-    padding: 0.6em 1.2em;
+    padding: 0.6em 1.2em !important;
     min-height: 2.8em;
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 0.6em;
-    border: 1px solid var(--primary-low-mid);
-    background: var(--secondary);
+    border: 1px solid var(--primary-low-mid) !important;
+    background: var(--secondary) !important;
+    transition: all 0.15s ease-in-out;
+    
+    &:hover {
+      border-color: var(--primary-low);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
     
     .d-icon {
       flex-shrink: 0;
@@ -119,6 +133,7 @@
     
     .selected-name {
       flex: 1;
+      font-weight: 500;
     }
     
     .d-icon-caret-down,
@@ -126,6 +141,12 @@
       margin-left: 0.3em;
       flex-shrink: 0;
     }
+  }
+  
+  .select-kit-body {
+    border-radius: 0.5em !important;
+    margin-top: 0.25em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 }
 
