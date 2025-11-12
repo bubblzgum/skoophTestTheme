@@ -1,0 +1,5 @@
+// Hide navigation container on category pages
+.navigation-categories .navigation-container,
+.categories-list .navigation-container {
+  display: none;
+}
