@@ -4,6 +4,131 @@
   display: none;
 }
 
+// Navigation container redesign
+.navigation-container {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 0;
+  gap: 1em;
+  flex-wrap: nowrap;
+  
+  // Left side container for category and tag
+  &::before {
+    content: "";
+    display: flex;
+    flex: 0 0 auto;
+    gap: 0.5em;
+  }
+  
+  // Hide unwanted elements in navigation container
+  .nav-pills,
+  .navigation-controls,
+  > li:not(.category-breadcrumb):not(.select-kit.combo-box.tag-drop) {
+    display: none !important;
+  }
+  
+  // Left side: category and tag dropdowns
+  .category-breadcrumb,
+  .select-kit.combo-box.tag-drop {
+    margin: 0;
+    flex: 0 0 auto;
+    
+    .select-kit-header {
+      border-radius: 1.5em !important; // Rounded border
+      padding: 0.6em 1.2em;
+      height: auto;
+      min-height: 2.8em;
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+      border: 1px solid var(--primary-low-mid);
+      background: var(--secondary);
+      
+      // Icon container before text
+      .d-icon:first-child {
+        display: none; // Hide default icons
+      }
+      
+      &::before {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 1em;
+        color: var(--primary-medium);
+        flex-shrink: 0;
+      }
+      
+      .selected-name,
+      .name {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      // Caret icon at end
+      .d-icon-caret-down,
+      .d-icon-chevron-down {
+        margin-left: auto;
+        flex-shrink: 0;
+        &::before {
+          content: "\f054"; // caret-right icon
+          font-family: "Font Awesome 6 Free";
+          font-weight: 900;
+        }
+      }
+    }
+  }
+  
+  // Category breadcrumb - layer-group icon
+  .category-breadcrumb {
+    .select-kit-header::before {
+      content: "\f5fd"; // layer-group
+    }
+  }
+  
+  // Tag drop - hashtag icon
+  .select-kit.combo-box.tag-drop {
+    .select-kit-header::before {
+      content: "\f292"; // hashtag
+    }
+  }
+  
+  // Right side: topic navigation filter
+  .topic-navigation-filter {
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+}
+
+// Topic navigation filter dropdown styling
+.topic-navigation-filter {
+  .select-kit-header {
+    border-radius: 1.5em !important;
+    padding: 0.6em 1.2em;
+    min-height: 2.8em;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    border: 1px solid var(--primary-low-mid);
+    background: var(--secondary);
+    
+    .d-icon {
+      flex-shrink: 0;
+    }
+    
+    .selected-name {
+      flex: 1;
+    }
+    
+    .d-icon-caret-down,
+    .d-icon-chevron-down {
+      margin-left: 0.3em;
+      flex-shrink: 0;
+    }
+  }
+}
+
 // New topic button in header
 .before-header-panel-outlet {
   margin-left: auto;
