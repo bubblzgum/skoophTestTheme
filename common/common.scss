@@ -7,6 +7,7 @@
 // New topic button in header
 .before-header-panel-outlet {
   margin-left: auto;
+  margin-right: 0.5em; // Add spacing to match panel icon spacing
 
   + .panel {
     margin-left: 0;
@@ -23,6 +24,17 @@
 }
 
 @media (max-width: 767px) {
+  #new-create-topic {
+    // Remove background and make it an icon button like search/chat
+    background: transparent;
+    border: none;
+    padding: 0.5em;
+    
+    &:hover {
+      background: var(--d-hover);
+    }
+  }
+
   #new-create-topic span {
     display: none;
   }
