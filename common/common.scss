@@ -1,7 +1,18 @@
-// Hide navigation container on category pages
+// Hide navigation bar on category pages
 .navigation-categories .navigation-container,
 .categories-list .navigation-container {
   display: none;
+}
+
+// Force stacked navigation style instead of bar style
+.nav-pills {
+  display: flex;
+  flex-direction: column;
+  
+  > li {
+    display: block;
+    width: 100%;
+  }
 }
 
 // New topic button in header
