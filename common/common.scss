@@ -53,10 +53,15 @@
 
 .navigation-container {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   gap: 0.5em;
   padding: 0.5em 0;
+  
+  // Group category and tag dropdowns on the left
+  > .category-breadcrumb,
+  > .tag-drop {
+    flex: 0 0 auto;
+  }
 }
 
 // Category and Tag dropdown styling
