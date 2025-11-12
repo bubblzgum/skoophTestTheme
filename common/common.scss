@@ -21,6 +21,11 @@
     display: none !important;
   }
   
+  // When there's no category/tag, ensure filter is still on the right
+  &:not(:has(.category-breadcrumb, .combo-box.tag-drop)) {
+    justify-content: flex-end;
+  }
+  
   // Left side: category and tag dropdowns
   .category-breadcrumb,
   .combo-box.tag-drop {
