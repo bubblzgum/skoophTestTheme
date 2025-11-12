@@ -41,3 +41,102 @@
     top: 0.1em; // optical alignment
   }
 }
+
+// Navigation container customization
+#navigation-bar {
+  display: none;
+}
+
+.navigation-controls {
+  display: none;
+}
+
+.navigation-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 0;
+  
+  // Group category and tag dropdowns on the left
+  > .category-breadcrumb,
+  > .tag-drop {
+    flex: 0 0 auto;
+  }
+}
+
+// Category and Tag dropdown styling
+.category-breadcrumb .select-kit.combo-box.category-drop,
+.tag-drop .select-kit.combo-box.tag-drop {
+  min-width: 150px;
+  
+  .select-kit-header {
+    height: 38px;
+    background: var(--secondary);
+    border: 1px solid var(--primary-300);
+    border-radius: 20px;
+    padding: 0 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    
+    &:before {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 0.25em;
+    }
+    
+    .d-icon-caret-down {
+      display: none;
+    }
+    
+    &:after {
+      content: "\f0da"; // fa-caret-right
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-left: auto;
+    }
+  }
+}
+
+.category-breadcrumb .select-kit.combo-box.category-drop .select-kit-header:before {
+  content: "\f5fd"; // fa-layer-group
+}
+
+.tag-drop .select-kit.combo-box.tag-drop .select-kit-header:before {
+  content: "\f292"; // fa-hashtag
+}
+
+// Route filter dropdown styling
+.route-filter-dropdown {
+  margin-left: auto;
+  
+  .select-kit.combo-box {
+    min-width: 120px;
+    
+    .select-kit-header {
+      height: 38px;
+      background: var(--secondary);
+      border: 1px solid var(--primary-300);
+      border-radius: 20px;
+      padding: 0 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      
+      .d-icon {
+        margin-right: 0.25em;
+      }
+      
+      .d-icon-caret-down {
+        display: none;
+      }
+      
+      &:after {
+        content: "\f0da"; // fa-caret-right
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        margin-left: auto;
+      }
+    }
+  }
+}
