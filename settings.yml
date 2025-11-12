@@ -2,3 +2,13 @@ sidebar_width:
   type: integer
   default: 17
   description: Change this in case of custom sidebar width. Value in EM only.
+new_topic_button_icon:
+  default: "pen-to-square"
+new_topic_button_text:
+  default: "New Topic"
+new_topic_button_title:
+  default: ""
+hide_default_button:
+  default: true
+show_to_anon:
+  default: false
